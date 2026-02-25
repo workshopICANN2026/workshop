@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshop ICANN 2026 — Neural Intelligence for Secure Cyber-Physical Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0b1f3a;
+      --blue:      #1a4a8a;
+      --cyan:      #0ea5e9;
+      --cyan-soft: #bae6fd;
+      --white:     #f8fafc;
+      --off:       #f1f5f9;
+      --muted:     #64748b;
+      --border:    #e2e8f0;
+      --text:      #1e293b;
+      --radius:    14px;
+      --radius-sm: 8px;
+      --shadow:    0 4px 24px rgba(11,31,58,.10);
+      --shadow-md: 0 8px 40px rgba(11,31,58,.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1rem;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { max-width: 100%; display: block; }
+
+    /* ─── SKIP LINK ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 1rem;
+      background: var(--cyan); color: #fff;
+      padding: .5rem 1rem; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      font-weight: 600; z-index: 9999;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(11,31,58,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: auto;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: .9rem 1.5rem;
+      gap: 1rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--cyan);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-mark svg { width: 20px; height: 20px; }
+    .nav-logo-text {
+      line-height: 1.2;
+    }
+    .nav-logo-text strong {
+      display: block; color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: .95rem; letter-spacing: .02em;
+    }
+    .nav-logo-text span {
+      display: block; color: var(--cyan-soft);
+      font-size: .72rem; letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex; gap: .25rem; list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,.75);
+      font-size: .85rem; font-weight: 500;
+      padding: .45rem .85rem;
+      border-radius: 50px;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover {
+      color: #fff; background: rgba(255,255,255,.1);
+      text-decoration: none;
+    }
+    .nav-links a.cta {
+      background: var(--cyan); color: #fff;
+      font-weight: 600;
+    }
+    .nav-links a.cta:hover { background: #0284c7; }
+    .hamburger {
+      display: none; cursor: pointer;
+      background: none; border: none;
+      flex-direction: column; gap: 5px;
+      padding: 6px; flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: #fff; border-radius: 2px;
+      transition: .3s;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 1.5rem 5rem;
+      text-align: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(14,165,233,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(26,74,138,.5) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Grid lines decoration */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(14,165,233,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,165,233,.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 860px; margin: auto;
+    }
+    .hero-conference-tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(14,165,233,.15);
+      border: 1px solid rgba(14,165,233,.3);
+      color: var(--cyan-soft);
+      font-size: .78rem; font-weight: 600;
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-conference-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.8); }
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 1rem;
+      letter-spacing: -.01em;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--cyan);
+    }
+    .hero-subtitle {
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,.6);
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+    .hero-meta-bar {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: .75rem 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .meta-pill {
+      display: flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50px;
+      padding: .5rem 1.1rem;
+      font-size: .88rem; color: rgba(255,255,255,.85);
+      font-weight: 400;
+    }
+    .meta-pill svg { flex-shrink: 0; color: var(--cyan); }
+    .hero-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--cyan); color: #fff;
+      font-weight: 600; font-size: .95rem;
+      padding: .8rem 2rem; border-radius: 50px;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(14,165,233,.35);
+    }
+    .btn-primary:hover {
+      background: #0284c7; text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(14,165,233,.45);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: transparent; color: rgba(255,255,255,.8);
+      font-weight: 500; font-size: .95rem;
+      padding: .8rem 2rem; border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.2);
+      transition: background .2s, color .2s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.1); color: #fff;
+      text-decoration: none;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 5rem 1.5rem; }
+    section:nth-child(even) { background: var(--off); }
+    .container { max-width: 1100px; margin: auto; }
+    .section-header {
+      text-align: center; margin-bottom: 3rem;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: .6rem;
+    }
+    .section-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; color: var(--navy);
+      line-height: 1.2;
+    }
+    .section-header p {
+      color: var(--muted);
+      margin-top: .6rem;
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin-left: auto; margin-right: auto;
+    }
+
+    /* ─── QUICK FACTS ─── */
+    .facts-strip {
+      background: var(--navy);
+      padding: 2rem 1.5rem;
+    }
+    .facts-inner {
+      max-width: 1100px; margin: auto;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 1.5rem;
+    }
+    .fact-item {
+      text-align: center;
+      flex: 1; min-width: 140px;
+    }
+    .fact-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem; font-weight: 800;
+      color: var(--cyan); line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .fact-label {
+      font-size: .8rem; color: rgba(255,255,255,.55);
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+
+    /* ─── DESCRIPTION ─── */
+    .desc-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 3rem;
+      align-items: start;
+    }
+    .desc-body { font-size: 1rem; color: var(--text); }
+    .desc-body p { margin-bottom: 1.1rem; }
+    .desc-body strong { color: var(--navy); }
+    .desc-body ul {
+      padding-left: 0; list-style: none;
+      margin-top: .5rem;
+    }
+    .desc-body ul li {
+      display: flex; align-items: flex-start; gap: .7rem;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .95rem; color: var(--text);
+    }
+    .desc-body ul li:last-child { border-bottom: none; }
+    .desc-body ul li::before {
+      content: '';
+      width: 6px; height: 6px;
+      min-width: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      margin-top: .55rem;
+    }
+
+    /* sidebar info card */
+    .info-sidebar {
+      position: sticky; top: 90px;
+    }
+    .info-card {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 2rem;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+    .info-card::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 150px; height: 150px;
+      background: radial-gradient(circle, rgba(14,165,233,.3), transparent 70%);
+      pointer-events: none;
+    }
+    .info-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      color: var(--cyan-soft);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      font-size: .75rem;
+    }
+    .info-row {
+      display: flex; gap: .9rem;
+      padding: .9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      align-items: flex-start;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(14,165,233,.15);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .info-row-text strong {
+      display: block;
+      font-size: .82rem; color: rgba(255,255,255,.5);
+      font-weight: 400; margin-bottom: .2rem;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .info-row-text span {
+      font-size: .92rem; color: #fff;
+      font-weight: 500; line-height: 1.4;
+    }
+    .info-card-btn {
+      display: block; margin-top: 1.5rem;
+      text-align: center;
+      background: var(--cyan); color: #fff;
+      font-weight: 600; font-size: .9rem;
+      padding: .75rem 1.5rem; border-radius: 50px;
+      transition: background .2s;
+    }
+    .info-card-btn:hover { background: #0284c7; text-decoration: none; }
+
+    /* ─── ORGANIZERS ─── */
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
+      gap: 1.8rem;
+    }
+    .org-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      display: flex; gap: 1.5rem;
+      align-items: flex-start;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .org-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .org-photo-wrap {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .org-photo {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      display: block;
+    }
+    .org-initials {
+      display: none;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      color: #fff;
+      align-items: center; justify-content: center;
+    }
+    .org-photo.error { display: none; }
+    .org-photo.error + .org-initials { display: flex; }
+    .org-badge {
+      position: absolute; bottom: 2px; right: 2px;
+      background: var(--navy); color: var(--cyan-soft);
+      font-size: .58rem; font-weight: 800;
+      padding: .15rem .45rem; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: .05em;
+      white-space: nowrap;
+      border: 2px solid #fff;
+    }
+    .org-info { flex: 1; min-width: 0; overflow-wrap: break-word; }
+    .org-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      color: var(--navy); margin-bottom: .2rem;
+    }
+    .org-role {
+      font-size: .8rem; font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: .8rem;
+    }
+    .org-bio {
+      font-size: .88rem; color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: .9rem;
+    }
+    .org-links {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+    }
+    .org-link {
+      display: inline-flex; align-items: center;
+      font-size: .78rem; font-weight: 600;
+      background: var(--off); color: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .25rem .65rem;
+      transition: background .2s, color .2s;
+    }
+    .org-link:hover {
+      background: var(--navy); color: #fff;
+      text-decoration: none;
+    }
+
+    /* ─── CONTACTS ─── */
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.4rem;
+    }
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      box-shadow: var(--shadow);
+      display: flex; gap: 1.2rem;
+      align-items: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .contact-icon {
+      width: 50px; height: 50px; flex-shrink: 0;
+      background: var(--navy);
+      border-radius: 14px;
+      display: flex; align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .contact-card h4 {
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: var(--muted); margin-bottom: .3rem;
+    }
+    .contact-card p {
+      font-size: .95rem; font-weight: 600;
+      color: var(--text); line-height: 1.4;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.5);
+      padding: 3rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: auto;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    .footer-brand strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      color: #fff; margin-bottom: .4rem;
+    }
+    .footer-brand p { font-size: .85rem; max-width: 280px; line-height: 1.6; }
+    .footer-links h5 {
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: rgba(255,255,255,.4);
+      margin-bottom: .8rem;
+    }
+    .footer-links ul { list-style: none; }
+    .footer-links ul li { margin-bottom: .4rem; }
+    .footer-links a {
+      color: rgba(255,255,255,.6);
+      font-size: .88rem;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--cyan); text-decoration: none; }
+    .footer-bottom {
+      max-width: 1100px; margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: .8rem;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    /* ─── TOAST ─── */
+    #toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+      background: #059669; color: #fff;
+      padding: .9rem 1.5rem; border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,.2);
+      font-weight: 600; font-size: .92rem;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .desc-layout {
+        grid-template-columns: 1fr;
+      }
+      .info-sidebar { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--navy);
+        border-top: 1px solid rgba(255,255,255,.08);
+        padding: .5rem 0 1rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        display: block;
+        padding: .7rem 1.5rem;
+        border-radius: 0;
+      }
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .hero-meta-bar { gap: .5rem 1rem; }
+      .meta-pill { font-size: .8rem; padding: .4rem .85rem; }
+      .org-card { flex-direction: column; align-items: center; text-align: center; }
+      .org-links { justify-content: center; }
+      .facts-inner { gap: 1.5rem 2rem; }
+      section { padding: 3.5rem 1.25rem; }
+      .footer-inner { flex-direction: column; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-inner > * {
+        animation: fadeUp .7s ease both;
+      }
+      .hero-conference-tag { animation-delay: .1s; }
+      .hero h1 { animation-delay: .2s; }
+      .hero-subtitle { animation-delay: .3s; }
+      .hero-meta-bar { animation-delay: .4s; }
+      .hero-actions { animation-delay: .5s; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .org-card, .contact-card {
+        animation: fadeIn .5s ease both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="toast" role="alert" aria-live="polite"></div>
+
+<!-- ─── NAVIGATION ─── -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+	<a href="https://e-nns.org/icann2026/wp-content/uploads/sites/14/2026/01/enns-1.png" 
+	   class="nav-logo" 
+	   aria-label="Workshop ICANN 2026 home">
+
+	   <div class="nav-logo-mark">
+		  <img src="https://e-nns.org/icann2026/wp-content/uploads/sites/14/2026/01/enns-1.png" 
+			   alt="Logo" />
+	   </div>
+
+	   <div class="nav-logo-text">
+		  <strong>Workshop ICANN 2026</strong>
+	   </div>
+	</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#descrizione">Workshop Description</a></li>
+      <li><a href="#organizzatori">Organizers</a></li>
+      <li><a href="#contatti">Contacts</a></li>
+      <li><a href="https://e-nns.org/icann2026/" target="_blank" rel="noopener" class="cta">ICANN 2026 ↗</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<header class="hero" role="banner">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-conference-tag" role="doc-subtitle">
+		35th International Conference on Artificial Neural Networks    </div>
+    <h1>
+      Interaction Dynamics &amp; AI:<br>
+      <em>Neural Intelligence for Secure<br>Cyber-Physical Systems</em>
+    </h1>
+    <p class="hero-subtitle">
+      An interdisciplinary workshop bridging AI-driven, Industry 5.0 paradigms, Additive Manufacturing and intelligent cyber-physical systems.
+    </p>
+    <div class="hero-meta-bar" role="list" aria-label="Event details">
+      <div class="meta-pill" role="listitem">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        September 14–17, 2026
+      </div>
+      <div class="meta-pill" role="listitem">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        University of Padua, Italy
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#descrizione" class="btn-primary">
+        Learn More
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+      <a href="#contatti" class="btn-secondary">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+<!-- ─── QUICK FACTS ─── -->
+<div class="facts-strip" aria-label="Key figures">
+  <div class="facts-inner">
+    <div class="fact-item">
+      <div class="fact-number">35th</div>
+      <div class="fact-label">Edition of ICANN</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-number">4</div>
+      <div class="fact-label">Conference Days</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-number">3</div>
+      <div class="fact-label">Workshop Organizers</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-number">2026</div>
+      <div class="fact-label">Padua, Italy</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DESCRIPTION ─── -->
+<section id="descrizione" aria-labelledby="desc-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Workshop Description</span>
+      <h2 id="desc-title">AI-Driven Manufacturing in the Industry 5.0 Era</h2>
+      <p>Bridging neural network research and real-world industrial deployment</p>
+    </div>
+
+    <div class="desc-layout">
+      <div class="desc-body">
+        <p>
+          The transition toward <strong>Industry 5.0</strong> introduces a new paradigm for manufacturing systems, shifting the focus from pure automation to human-centric, sustainable, and resilient industrial ecosystems. In this evolving landscape, production environments are increasingly modeled as complex cyber-physical systems characterized by multi-scale interactions, nonlinear dynamics, uncertainty, and strong interdependencies between physical processes, digital infrastructures, and human operators.
+        </p>
+        <p>
+          Recent advances in <strong>Artificial Neural Networks</strong> and <strong>Deep Learning</strong> are redefining Advanced Manufacturing by enabling intelligent, data-driven, and self-optimizing production processes. Among manufacturing technologies, <strong>Additive Manufacturing (AM)</strong> stands out as one of the most promising and challenging domains for the deployment of Artificial Intelligence.
+        </p>
+        <p>
+          Neural networks, Physics-Informed Neural Networks (PINNs), and hybrid physics–data-driven approaches are emerging as key enablers for high-fidelity surrogate modeling, learning under limited data regimes, real-time control architectures, autonomous defect detection, and multi-objective optimization — including energy efficiency and sustainability metrics.
+        </p>
+
+        <h3 style="font-family:'Syne',sans-serif; font-size:1rem; font-weight:800; color:var(--navy); margin: 1.5rem 0 .5rem; text-transform:uppercase; letter-spacing:.04em; font-size:.82rem;">Topics of Interest</h3>
+        <ul>
+          <li>Neural and hybrid models for AM process simulation</li>
+          <li>Physics-informed and knowledge-guided learning</li>
+          <li>Data-driven digital twins for AM systems</li>
+          <li>Real-time monitoring, control, and anomaly detection</li>
+          <li>Multi-objective and sustainability-aware process optimization</li>
+          <li>Robotics integration in intelligent AM environments</li>
+          <li>Robustness, interpretability, and certification of AI in safety-critical contexts</li>
+        </ul>
+
+        <p style="margin-top:1.1rem;">
+          By fostering an interdisciplinary and application-oriented dialogue, the workshop seeks to bridge the gap between methodological advances in neural networks and their reliable deployment in industrial AM systems — contributing to the evolution of additive manufacturing toward intelligent, sustainable, and resilient Industry 5.0 production paradigms.
+        </p>
+      </div>
+
+      <!-- sidebar -->
+      <aside class="info-sidebar" aria-label="Event information">
+        <div class="info-card">
+          <div class="info-card-title">Event Details</div>
+
+          <div class="info-row">
+            <div class="info-row-icon">📅</div>
+            <div class="info-row-text">
+              <strong>Dates</strong>
+              <span>September 14–17, 2026</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-row-icon">📍</div>
+            <div class="info-row-text">
+              <strong>Venue</strong>
+              <span>Conference Center, School of Psychology — University of Padua, Italy</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-row-icon">🏛️</div>
+            <div class="info-row-text">
+              <strong>Part of</strong>
+              <span>ICANN 2026 — 35th Conference on Artificial Neural Networks</span>
+            </div>
+          </div>
+          <a href="https://e-nns.org/icann2026/" target="_blank" rel="noopener" class="info-card-btn">
+            Visit ICANN 2026 Website ↗
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ORGANIZERS ─── -->
+<section id="organizzatori" aria-labelledby="org-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Team</span>
+      <h2 id="org-title">Workshop Organizers</h2>
+    </div>
+
+    <div class="org-grid">
+
+      <!-- Organizer 1 -->
+      <article class="org-card">
+        <div class="org-photo-wrap">
+          <img class="org-photo"
+               src="https://i1.rgstatic.net/ii/profile.image/11431281103554921-1669726347398_Q128/Fabrizia-Devito.jpg"
+               alt="Portrait of Dr. Fabrizia Devito"
+               loading="lazy"
+               onerror="this.classList.add('error')" />
+          <div class="org-initials" style="background:linear-gradient(135deg,#2c3e50,#34495e)" aria-hidden="true">FD</div>
+          <span class="org-badge" aria-label="Role: CMT Responsible, Organizer">CMT Responable</span>
+        </div>
+        <div class="org-info">
+          <h3>Dr. Fabrizia Devito, Ph.D.</h3>
+          <div class="org-role">University of Bari Aldo Moro</div>
+          <p class="org-bio">
+            Researcher at the Department of Computer Science. Her work focuses on Additive Manufacturing technologies and advanced data processing, with particular emphasis on AI and computational techniques for complex manufacturing challenges.
+          </p>
+          <div class="org-links">
+            <a class="org-link" href="mailto:workshop.icann2026@uniba.it" aria-label="Email Fabrizia Devito">Email</a>
+            <a class="org-link" href="https://www.linkedin.com/in/fabrizia-devito-ph-d-5b360720a/" target="_blank" rel="noopener" aria-label="Fabrizia Devito on LinkedIn">LinkedIn</a>
+            <a class="org-link" href="https://orcid.org/0009-0001-3297-2491" target="_blank" rel="noopener" aria-label="Fabrizia Devito on ORCID">ORCID</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Organizer 2 -->
+      <article class="org-card">
+        <div class="org-photo-wrap">
+          <img class="org-photo"
+               src="https://islab.di.uniba.it/wp-content/uploads/2024/05/impedovo.png"
+               alt="Portrait of Prof. Donato Impedovo"
+               loading="lazy"
+               onerror="this.classList.add('error')" />
+          <div class="org-initials" style="background:linear-gradient(135deg,#16a085,#1abc9c)" aria-hidden="true">DI</div>
+          <span class="org-badge" aria-label="Role: Organizer">Organizer</span>
+        </div>
+        <div class="org-info">
+          <h3>Prof. Donato Impedovo</h3>
+          <div class="org-role">University of Bari Aldo Moro</div>
+          <p class="org-bio">
+            Associate Professor at the Department of Computer Sciences. His research focuses on pattern recognition, Machine Learning, and signal and image processing, with applications in intelligent systems and human–machine interaction.
+          </p>
+          <div class="org-links">
+            <a class="org-link" href="mailto:donato.impedovo@uniba.it" aria-label="Email Donato Impedovo">Email</a>
+            <a class="org-link" href="https://www.linkedin.com/in/donato-i-58655459/" target="_blank" rel="noopener" aria-label="Donato Impedovo on LinkedIn">LinkedIn</a>
+            <a class="org-link" href="https://orcid.org/0000-0002-9285-2555" target="_blank" rel="noopener" aria-label="Donato Impedovo on ORCID">ORCID</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Organizer 3 -->
+      <article class="org-card">
+        <div class="org-photo-wrap">
+          <img class="org-photo"
+               src="https://www.dmmm.poliba.it/images/comprofiler/75_662625282921d.jpg"
+               alt="Portrait of Prof. Fulvio Lavecchia"
+               loading="lazy"
+               onerror="this.classList.add('error')" />
+          <div class="org-initials" style="background:linear-gradient(135deg,#8e44ad,#9b59b6)" aria-hidden="true">FL</div>
+          <span class="org-badge" aria-label="Role: Organizer">Organizer</span>
+        </div>
+        <div class="org-info">
+          <h3>Prof. Fulvio Lavecchia</h3>
+          <div class="org-role">Polytechnic University of Bari</div>
+          <p class="org-bio">
+            Associate Professor at the Department of Mechanics, Mathematics and Management. His research bridges advanced manufacturing systems, Additive Manufacturing, and industrial process optimization, promoting high-impact engineering solutions.
+          </p>
+          <div class="org-links">
+            <a class="org-link" href="mailto:fulvio.lavecchia@poliba.it" aria-label="Email Fulvio Lavecchia">Email</a>
+            <a class="org-link" href="https://www.linkedin.com/in/fulvio-lavecchia-00761421/" target="_blank" rel="noopener" aria-label="Fulvio Lavecchia on LinkedIn">LinkedIn</a>
+            <a class="org-link" href="https://orcid.org/0000-0002-7941-389X" target="_blank" rel="noopener" aria-label="Fulvio Lavecchia on ORCID">ORCID</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACTS ─── -->
+<section id="contatti" aria-labelledby="contacts-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label"></span>
+      <h2 id="contacts-title">Contacts</h2>
+      <p>Reach out for any questions about the workshop</p>
+    </div>
+
+    <div class="contacts-grid">
+      <div class="contact-card">
+        <div class="contact-icon" aria-hidden="true">✉️</div>
+        <div>
+          <h4>Email</h4>
+          <p><a href="mailto:interactionai.icann26@gmail.com">interactionai.icann26@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" aria-hidden="true">📍</div>
+        <div>
+          <h4>Location</h4>
+          <p>School of Psychology, University of Padua, Italy</p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" aria-hidden="true">🌐</div>
+        <div>
+          <h4>ICANN 2026 Website</h4>
+          <p><a href="https://e-nns.org/icann2026/" target="_blank" rel="noopener">e-nns.org/icann2026 ↗</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>Workshop ICANN 2026</strong>
+      <p>Interaction Dynamics e AI: Neural Intelligence for Secure Cyber-Physical Systems <br>Padua (Italy)</br></p>
+    </div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <h5>Quick Links</h5>
+      <ul role="list">
+        <li><a href="#descrizione">Workshop Description</a></li>
+        <li><a href="#organizzatori">Organizers</a></li>
+        <li><a href="#contatti">Contacts</a></li>
+        <li><a href="https://e-nns.org/icann2026/" target="_blank" rel="noopener">ICANN 2026</a></li>
+      </ul>
+    </nav>
+    <div class="footer-links">
+      <h5>Organizers</h5>
+      <ul role="list">
+        <li><a href="https://www.uniba.it" target="_blank" rel="noopener">University of Bari Aldo Moro</a></li>
+        <li><a href="https://www.poliba.it" target="_blank" rel="noopener">Polytechnic University of Bari</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Workshop ICANN — All rights reserved.</span>
+    <span>Padua, Italy · September 14–17, 2026</span>
+  </div>
+</footer>
+
+<script>
+  // Hamburger menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close nav when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Active nav link highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(a => a.removeAttribute('aria-current'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.setAttribute('aria-current', 'page');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
