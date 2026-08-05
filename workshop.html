@@ -505,6 +505,57 @@
       color: var(--text); line-height: 1.4;
     }
 
+    /* ─── PROGRAM TABLE ─── */
+    .program-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .program-table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      background: #fff;
+      min-width: 480px;
+    }
+    .program-table .col-time { width: 180px; }
+    .program-table .col-id { width: 140px; }
+    .program-table th, .program-table td {
+      padding: .9rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: .92rem;
+    }
+    .program-table thead th {
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .program-table tbody tr:last-child td { border-bottom: none; }
+    .program-table tbody tr:hover td { background: var(--off); }
+    .program-session td {
+      background: var(--cyan-soft);
+      color: var(--navy);
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .program-table td.paper-id { color: var(--cyan); font-weight: 600; white-space: nowrap; }
+    .program-table td.paper-time { white-space: nowrap; color: var(--muted); }
+    .program-break td {
+      background: var(--navy);
+      color: #ffffff;
+      font-weight: 700;
+      text-align: center;
+    }
+    .program-table tbody tr.program-break:hover td { background: var(--navy); }
+    .program-table tbody tr.program-session:hover td { background: var(--cyan-soft); }
+
     /* ─── FOOTER ─── */
     footer {
       background: var(--navy);
@@ -650,12 +701,13 @@
     </button>
 
     <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#descrizione">Workshop Description</a></li>
+    <li><a href="#programma">Program</a></li>
+    <li><a href="#descrizione">Workshop Description</a></li>
 	  <li><a href="#generalinfo">General Information</a></li>
 	  <li><a href="#submissionguidelines">Submission Guidelines</a></li>
-      <li><a href="#organizzatori">Organizers</a></li>
-      <li><a href="#contatti">Contacts</a></li>
-      <li><a href="https://e-nns.org/icann2026/" target="_blank" rel="noopener" class="cta">ICANN 2026 ↗</a></li>
+    <li><a href="#organizzatori">Organizers</a></li>
+    <li><a href="#contatti">Contacts</a></li>
+    <li><a href="https://e-nns.org/icann2026/" target="_blank" rel="noopener" class="cta">ICANN 2026 ↗</a></li>
     </ul>
   </div>
 </nav>
@@ -681,7 +733,7 @@
           <line x1="8" y1="2" x2="8" y2="6"/>
           <line x1="3" y1="10" x2="21" y2="10"/>
         </svg>
-        September 14–17, 2026
+        September 14, 2026
       </div>
       <div class="meta-pill" role="listitem">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -725,23 +777,144 @@
   </div>
 </div>
 
+<!-- ─── PROGRAM ─── -->
+<section id="programma" aria-labelledby="programma-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Schedule</span>
+      <div class="section-header" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <img src="https://media.tenor.com/UBNApyolWz4AAAAi/new-blinking-new-blinking-without-background.gif" 
+            alt="new" 
+            style="height: 40px;">
+        
+        <h2 id="org-title">Workshop Program</h2>
+      </div>
+
+      
+    </div>
+
+    <div class="desc-layout">
+      <div class="program-table-wrap">
+        <table class="program-table">
+          <colgroup>
+            <col class="col-time">
+            <col class="col-id">
+            <col class="col-title">
+          </colgroup>
+          <thead>
+            <tr class="program-break">
+              <td>09:30 - 09:40</td>
+              <td colspan="2">Welcome, Introduction &amp; Workshop Overview</td>
+            </tr>
+            <tr>
+              <th scope="col">Time</th>
+              <th scope="col">Paper ID</th>
+              <th scope="col">Title</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="program-session">
+              <td colspan="3">1. Industrial Data Acquisition &amp; Representation</td>
+            </tr>
+            <tr>
+              <td class="paper-time">09:40 - 10:00</td>
+              <td class="paper-id">923</td>
+              <td>A Unified Speech-Semantic Framework for Vocal Directive Structuralization in Industrial Iron Transport Dispatch</td>
+            </tr>
+            <tr>
+              <td class="paper-time">10:00 - 10:20</td>
+              <td class="paper-id">947</td>
+              <td>Structured Data Generation for AI-Ready Monitoring in Hybrid Robotic Additive Manufacturing</td>
+            </tr>
+
+            <tr class="program-session">
+              <td colspan="3">2. AI for Monitoring and Diagnostics</td>
+            </tr>
+            <tr>
+              <td class="paper-time">10:20 - 10:40</td>
+              <td class="paper-id">891</td>
+              <td>TimePred: efficient and interpretable offline change point detection for high volume data -- with application to industrial process monitoring</td>
+            </tr>
+            <tr>
+              <td class="paper-time">10:40 - 11:00</td>
+              <td class="paper-id">219</td>
+              <td>Towards Low-rank Tensor Approximation in Deep Domain Adaptation for Online Early Fault Detection</td>
+            </tr>
+
+            <tr class="program-break">
+              <td>11:00 - 11:30</td>
+              <td colspan="2">Coffee Break</td>
+            </tr>
+
+
+            <tr class="program-session">
+              <td colspan="3">3. Intelligent Control and Manufacturing Systems</td>
+            </tr>
+            <tr>
+              <td class="paper-time">11:30 - 11:50</td>
+              <td class="paper-id">941</td>
+              <td>A Rule-Based Human Pose Estimation Framework for Interpretable Ergonomic Risk Screening</td>
+            </tr>
+            <tr>
+              <td class="paper-time">11:50 - 12:10</td>
+              <td class="paper-id">939</td>
+              <td>Neural Feedback Controller Toolkit for Heterogeneous Embedded Systems</td>
+            </tr>
+            <tr>
+              <td class="paper-time">12:10 - 12:30</td>
+              <td class="paper-id">951</td>
+              <td>Development of a Cobot-Based Hybrid Manufacturing Prototype Using Machine Learning</td>
+            </tr>
+
+
+            <tr class="program-session">
+              <td colspan="3">4. AI for Additive Manufacturing: Quality and Security</td>
+            </tr>
+            <tr>
+              <td class="paper-time">12:30 - 12:50</td>
+              <td class="paper-id">935</td>
+              <td>Augmentation-Aware Defect Detection in Additive Manufacturing</td>
+            </tr>
+            <tr>
+              <td class="paper-time">12:50 - 13:10</td>
+              <td class="paper-id">928</td>
+              <td>Label Flipping Attack in Additive Manufacturing: an Underrated Threat</td>
+            </tr>
+
+            <tr class="program-break">
+              <td>13:10</td>
+              <td colspan="2">Final Remarks</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- sidebar -->
+      <aside class="info-sidebar" aria-label="Presenter information">
+        <div class="info-card">
+          <div class="info-card-title">Presenter Guidelines</div>
+
+          <p style="font-size:.92rem; line-height:1.6; margin-bottom:1rem; text-align:justify;">
+            To facilitate the organization of the session, we kindly ask you to upload your presentation materials to the Google Drive folder available at the following link:
+            <a href="https://drive.google.com/drive/folders/1QSoC44rSPLf--oe7i8eLyVYMsQOzDaXg?usp=sharing" target="_blank" rel="noopener" style="color:var(--cyan-soft); overflow-wrap:anywhere; word-break:break-word; display:block; margin:0;">https://drive.google.com/drive/folders/1QSoC44rSPLf--oe7i8eLyVYMsQOzDaXg?usp=sharing</a>
+          </p>
+          <p style="font-size:.92rem; line-height:1.6; text-align:justify;">
+            When uploading your presentation, please name the files using the following format: Paper ID – Presenter Name (e.g., PaperID–JohnSmith).
+          </p>
+          <br>
+          <p style="font-size:.92rem; line-height:1.6; text-align:justify;">
+            Please upload both the PowerPoint version (.ppt/.pptx) and the PDF version of your presentation no later than <strong><u>1 September 2026</u></strong>.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- ─── DESCRIPTION ─── -->
 <section id="descrizione" aria-labelledby="desc-title">
   <div class="container">
-  
-<div class="section-header" style="background-color: #cce0ff; padding: 40px 20px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 25px;">
-  <img src="https://media.tenor.com/UBNApyolWz4AAAAi/new-blinking-new-blinking-without-background.gif" alt="Animated Icon" style="width: 100px; height: 100px;">
-  <div style="text-align: center;">
-    <h2 id="desc-title" style="margin: 0 0 15px 0; font-size: 32px;">CALL FOR REVIEWERS</h2>
-    <p style="margin: 0; font-size: 18px; line-height: 1.6;">
-      Please volunteer as a reviewer to help us ensure the quality of the papers presented at this Workshop: 
-      <a href="https://forms.gle/SERTXfcSuhEByhqdA" style="color: #0000FF; text-decoration: underline;" target="_blank">
-        Click here to sign up
-      </a>
-    </p>
-  </div>
-  
-</div>
     <div class="section-header">
       <span class="section-label">Workshop Description</span>
       <h2 id="desc-title">AI-Driven Manufacturing in the Industry 5.0 Era</h2>
@@ -785,7 +958,10 @@
             <div class="info-row-icon">📅</div>
             <div class="info-row-text">
               <strong>Dates</strong>
-              <span>September 14–17, 2026</span>
+              <span>September 14, 2026</span>
+              <img src="https://media.tenor.com/UBNApyolWz4AAAAi/new-blinking-new-blinking-without-background.gif" 
+				   alt="gif" 
+				   style="width:50px; vertical-align:middle; margin-left:5px;">
             </div>
           </div>
           <div class="info-row">
@@ -807,9 +983,6 @@
 		  <div class="info-row-text">
 			<strong>
 			  ICANN 2026 Workshop Deadlines 
-			  <img src="https://media.tenor.com/UBNApyolWz4AAAAi/new-blinking-new-blinking-without-background.gif" 
-				   alt="gif" 
-				   style="width:50px; vertical-align:middle; margin-left:5px;">
 			</strong>
 			<ul style="margin: 0; padding-left: 18px; font-size: 0.9em;">
 			  <li>Workshop Paper Submission Deadline: <strong>6 June 2026</strong></li>
@@ -861,9 +1034,7 @@
 <section id="submissionguidelines" aria-labelledby="org-title">
   <div class="container">
 <div class="section-header" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-  <img src="https://media.tenor.com/UBNApyolWz4AAAAi/new-blinking-new-blinking-without-background.gif" 
-       alt="new" 
-       style="height: 40px;">
+
   
   <h2 id="org-title">Submission Guidelines</h2>
 </div>
@@ -1037,6 +1208,25 @@
 }
 </style>
 
+
+
+<!-- ─── CALL FOR REVIEWERS ─── -->
+<section id="call-for-reviewers" aria-labelledby="cfr-title">
+  <div class="container">
+    <div class="section-header" style="background-color: #cce0ff; padding: 40px 20px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 25px;">
+      <div style="text-align: center;">
+        <h2 id="cfr-title" style="margin: 0 0 15px 0; font-size: 32px;">CALL FOR REVIEWERS</h2>
+        <p style="margin: 0; font-size: 18px; line-height: 1.6;">
+          Please volunteer as a reviewer to help us ensure the quality of the papers presented at this Workshop:
+          <a href="https://forms.gle/SERTXfcSuhEByhqdA" style="color: #0000FF; text-decoration: underline;" target="_blank">
+            Click here to sign up
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── ORGANIZERS ─── -->
 <section id="organizzatori" aria-labelledby="org-title">
   <div class="container">
@@ -1171,6 +1361,7 @@
       <h5>Quick Links</h5>
       <ul role="list">
         <li><a href="#descrizione">Workshop Description</a></li>
+        <li><a href="#programma">Program</a></li>
         <li><a href="#organizzatori">Organizers</a></li>
         <li><a href="#contatti">Contacts</a></li>
         <li><a href="https://e-nns.org/icann2026/" target="_blank" rel="noopener">ICANN 2026</a></li>
